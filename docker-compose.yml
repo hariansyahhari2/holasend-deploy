@@ -1,0 +1,30 @@
+version: '3'
+services: 
+  frontend:
+    build: ./holaSend
+    image: "com.enigma/holasend-web"
+    environment:
+      - REACT_APP_API_BASE_URL=http://localhost/api
+  backend:
+    build: ./api-holasend
+    image: "com.enigma/holasend-api"
+    restart: on-failure
+    environment: 
+      - DB_HOST=db
+  reverse-proxy:
+    build: ./reverse-proxy
+    image: "com.enigma/reverse-proxy"
+    ports: 
+      - "80:80"
+  db:
+    image: mysql
+    restart: always
+    environment: 
+      MYSQL_DATABASE: 'holasend'
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'user123'
+      MYSQL_ROOT_PASSWORD: '12345678'
+    ports: 
+      - '3306:3306'
+    expose: 
+      - '3306'

@@ -1,0 +1,30 @@
+.main-page{
+    display: flex;
+    height: auto;
+    box-sizing: border-box;
+    overflow: hidden; 
+}
+
+.left{
+    flex: 1;
+    background-color: white;
+    .left-bg{
+        width: 100%;
+        height: auto;
+    }
+}
+
+.right{
+    width: 700px;
+    background-color: white;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-sizing: border-box;
+    .title{
+        font-size: 20px;
+        font-weight: bold;
+        color: #2d2d2d;
+    }
+}
