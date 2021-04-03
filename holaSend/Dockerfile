@@ -1,7 +1,7 @@
 FROM node:14.15.4 as build
 WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
-ARG REACT_APP_API_BASE_URL=http://localhost/api 
+ARG REACT_APP_API_BASE_URL=http://localhost/api
 ENV REACT_APP_API_BASE_URL=$REACT_APP_API_BASE_URL
 COPY . /app
 RUN npm ci --loglevel verbose
