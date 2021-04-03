@@ -1,7 +1,7 @@
 FROM adoptopenjdk/openjdk11:alpine-slim
 
 ENV DATA_DIR=/images
-ENV DB_HOST=host.docker.intenal
+ENV DB_HOST=host.docker.internal
 
 RUN addgroup -S spring && adduser -S spring -G spring
 
