@@ -2,6 +2,7 @@
   "name": "holasend",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost/api",
   "dependencies": {
     "@reach/combobox": "^0.10.2",
     "@react-google-maps/api": "^1.9.0",
