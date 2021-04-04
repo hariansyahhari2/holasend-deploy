@@ -188,7 +188,6 @@ public class UserController {
         validateMinimumCourier(request);
         User user = findUser(request);
 
-        user.setUsername(model.getUsername());
         user.setEmail(model.getEmail());
         user.getUserDetails().setFirstName(model.getUserDetails().getFirstName());
         user.getUserDetails().setLastName(model.getUserDetails().getLastName());

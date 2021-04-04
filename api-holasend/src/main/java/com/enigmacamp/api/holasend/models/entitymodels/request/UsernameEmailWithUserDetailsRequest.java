@@ -10,10 +10,6 @@ import javax.validation.constraints.NotNull;
 @Data
 public class UsernameEmailWithUserDetailsRequest {
 
-    @Username
-    @NotBlank
-    private String username;
-
     @Email
     @NotBlank
     private String email;
