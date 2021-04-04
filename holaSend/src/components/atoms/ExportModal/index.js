@@ -31,7 +31,7 @@ const ExportModal = () => {
         if (before) param+=`&before=${before}`
         if (after) param+=`&after=${after}`
         return(
-            <Button variant="primary" href={`http://localhost:8080/task/export?token=${localStorage.getItem('token')}${param}`}>
+            <Button variant="primary" href={`${process.env.REACT_APP_APIBASE_URL}/task/export?token=${localStorage.getItem('token')}${param}`}>
                 Export
             </Button>
         )

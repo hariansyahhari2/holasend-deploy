@@ -17,7 +17,8 @@ import {
     watchGetAllTaskSaga, 
     watchPostTaskSaga, 
     watchGetAllTaskFinishedSaga, 
-    watchGetAllTaskUnfinishedSaga
+    watchGetAllTaskUnfinishedSaga,
+    watchPutTaskDoneByAdminSaga
 } from './task/taskSaga';
 import { 
     watchGetAllUserFilterSaga, 
@@ -62,6 +63,7 @@ export default function* rootSaga() {
         watchGetProfileSaga(),
         watchPutProfileSaga(),
         watchGetRadiusSaga(),
-        watchPutRadiusSaga()
+        watchPutRadiusSaga(),
+        watchPutTaskDoneByAdminSaga()
     ])
 }

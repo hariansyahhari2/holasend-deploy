@@ -6,7 +6,6 @@ import { GET_RADIUS_FAILURE, GET_RADIUS_REQUEST, GET_RADIUS_SUCCESS, PUT_RADIUS_
 function* getRadiusSaga() {
     let result = yield axios.get('/offset')
     .then(data => {
-        console.log("this get radius saga")
         return ({
             type: GET_RADIUS_SUCCESS,
             data: data

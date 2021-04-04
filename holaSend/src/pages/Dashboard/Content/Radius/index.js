@@ -2,11 +2,11 @@ import React, {useEffect, useState} from 'react'
 import { Button, Container } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import swal from 'sweetalert'
-import { DropdownList, Gap, Input, Loading } from '../../../../components/atoms'
+import { Gap, Input } from '../../../../components/atoms'
 import { getRadiusAction, putRadiusAction } from "../../../../configs/actions/radius/radiusAction"
 
 const Radius = (props) => {
-    const [data, setdata] = useState("")
+    const [data, setData] = useState("")
 
     useEffect(() => {
         onReload()
@@ -14,12 +14,11 @@ const Radius = (props) => {
 
     useEffect(() => {
         if(props.data) {
-            setdata(props.data)
+            setData(props.data)
         }
     }, [props.data]);
 
     const onReload = () => {
-        console.log("run this")
         props.dispatchGetRadiusAction()
     };
 
@@ -30,7 +29,7 @@ const Radius = (props) => {
 
     const onChange = (e) => {
         var value = e.target.value
-        setdata(value)
+        setData(value)
     }
 
     useEffect(() => {
@@ -66,7 +65,7 @@ const Radius = (props) => {
                             </div>
                             <div className="card-body" style={{ padding: "1rem 3rem" }}>
                                 <Gap height={10} />
-                                <Input label="Offset Value (m)" value={data} onChange={onChange} placeholder="Radius Value" />
+                                <Input label="Offset Value (m)" required={true} value={data} onChange={onChange} placeholder="Radius Value" />
                             </div>
                             <div className="card-footer" style={{ padding: "1rem 3rem" }}>
                                 <div className="row">

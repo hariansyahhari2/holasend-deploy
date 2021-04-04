@@ -1,6 +1,6 @@
 import axios from "../../api"
 import { put, takeLatest } from 'redux-saga/effects'
-import { DELETE_BY_ID_TASK_FAILURE, DELETE_BY_ID_TASK_REQUEST, DELETE_BY_ID_TASK_SUCCESS, GET_ALL_TASK_FAILURE, GET_ALL_TASK_FINISHED_FAILURE, GET_ALL_TASK_FINISHED_REQUEST, GET_ALL_TASK_FINISHED_SUCCESS, GET_ALL_TASK_REQUEST, GET_ALL_TASK_SUCCESS, GET_ALL_TASK_UNFINISHED_FAILURE, GET_ALL_TASK_UNFINISHED_REQUEST, GET_ALL_TASK_UNFINISHED_SUCCESS, POST_TASK_FAILURE, POST_TASK_REQUEST, POST_TASK_SUCCESS } from "../../constants/task/taskConstant"
+import { DELETE_BY_ID_TASK_FAILURE, DELETE_BY_ID_TASK_REQUEST, DELETE_BY_ID_TASK_SUCCESS, GET_ALL_TASK_FAILURE, GET_ALL_TASK_FINISHED_FAILURE, GET_ALL_TASK_FINISHED_REQUEST, GET_ALL_TASK_FINISHED_SUCCESS, GET_ALL_TASK_REQUEST, GET_ALL_TASK_SUCCESS, GET_ALL_TASK_UNFINISHED_FAILURE, GET_ALL_TASK_UNFINISHED_REQUEST, GET_ALL_TASK_UNFINISHED_SUCCESS, POST_TASK_FAILURE, POST_TASK_REQUEST, POST_TASK_SUCCESS, PUT_TASK_DONE_BY_ADMIN_FAILURE, PUT_TASK_DONE_BY_ADMIN_REQUEST, PUT_TASK_DONE_BY_ADMIN_SUCCESS } from "../../constants/task/taskConstant"
 import pagination from "../pagination";
 
 function* postTaskSaga(action) {
@@ -201,6 +201,23 @@ function* getAllTaskUnfinishedSaga(action) {
     yield put(result);
 }
 
+function* putTaskDoneByAdminSaga(action) {
+    let result = yield axios.put(`/task/finish/${action.id}`)
+        .then(data => {
+            return {
+                type: PUT_TASK_DONE_BY_ADMIN_SUCCESS,
+                data: data
+            }
+        })
+        .catch(e => {
+            return {
+                type: PUT_TASK_DONE_BY_ADMIN_FAILURE,
+                error: e
+            }
+        })
+    yield put(result)
+}
+
 export function* watchPostTaskSaga() {
     yield takeLatest(POST_TASK_REQUEST, postTaskSaga)
 }
@@ -219,4 +236,8 @@ export function* watchGetAllTaskFinishedSaga() {
 
 export function* watchGetAllTaskUnfinishedSaga() {
     yield takeLatest(GET_ALL_TASK_UNFINISHED_REQUEST, getAllTaskUnfinishedSaga)
+}
+
+export function* watchPutTaskDoneByAdminSaga() {
+    yield takeLatest(PUT_TASK_DONE_BY_ADMIN_REQUEST, putTaskDoneByAdminSaga)
 }

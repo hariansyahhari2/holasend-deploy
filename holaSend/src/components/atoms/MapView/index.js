@@ -33,7 +33,7 @@ const center = {
 
 export default function MapView(props) {
     const { isLoaded, loadError } = useLoadScript({
-        googleMapsApiKey: "AIzaSyAbOWCxICALjaal-MI2pNSaPbNvQZShtZ8",
+        googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
         libraries,
     })
     const [markers, setMarkers] = React.useState([])
@@ -63,7 +63,7 @@ export default function MapView(props) {
 
     return (
         <div>
-            <p className="label">{props.label}</p>
+            <p className="label">{props.label} {props.required ? <span style={{color: 'red'}}>*</span> : null}</p>
             <GoogleMap
                 id="map"
                 mapContainerStyle={mapContainerStyle}

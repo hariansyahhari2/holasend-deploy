@@ -1,4 +1,4 @@
-import { DELETE_BY_ID_TASK_FAILURE, DELETE_BY_ID_TASK_REQUEST, DELETE_BY_ID_TASK_SUCCESS, GET_ALL_TASK_FAILURE, GET_ALL_TASK_FINISHED_FAILURE, GET_ALL_TASK_FINISHED_REQUEST, GET_ALL_TASK_FINISHED_SUCCESS, GET_ALL_TASK_REQUEST, GET_ALL_TASK_SUCCESS, GET_ALL_TASK_UNFINISHED_FAILURE, GET_ALL_TASK_UNFINISHED_REQUEST, GET_ALL_TASK_UNFINISHED_SUCCESS, POST_TASK_FAILURE, POST_TASK_REQUEST, POST_TASK_SUCCESS } from "../../constants/task/taskConstant"
+import { DELETE_BY_ID_TASK_FAILURE, DELETE_BY_ID_TASK_REQUEST, DELETE_BY_ID_TASK_SUCCESS, GET_ALL_TASK_FAILURE, GET_ALL_TASK_FINISHED_FAILURE, GET_ALL_TASK_FINISHED_REQUEST, GET_ALL_TASK_FINISHED_SUCCESS, GET_ALL_TASK_REQUEST, GET_ALL_TASK_SUCCESS, GET_ALL_TASK_UNFINISHED_FAILURE, GET_ALL_TASK_UNFINISHED_REQUEST, GET_ALL_TASK_UNFINISHED_SUCCESS, POST_TASK_FAILURE, POST_TASK_REQUEST, POST_TASK_SUCCESS, PUT_TASK_DONE_BY_ADMIN_FAILURE, PUT_TASK_DONE_BY_ADMIN_REQUEST, PUT_TASK_DONE_BY_ADMIN_SUCCESS } from "../../constants/task/taskConstant"
 
 const initialState = {
     data: null,
@@ -159,5 +159,34 @@ export function getAllTaskUnfinishedReducer(state = initialState, action) {
             }
         default:
             return state
+    }
+}
+
+export function putTaskDoneByAdminReducer(state = {...initialState, data: false}, action) {
+    console.log("ini reduccer", action);
+    switch (action.type) {
+        case PUT_TASK_DONE_BY_ADMIN_REQUEST:
+            return {
+                ...state,
+                data: false,
+                isLoading: true
+            }
+        case PUT_TASK_DONE_BY_ADMIN_SUCCESS:
+            return { 
+                data: action.data,
+                isLoading: false,
+                error: null
+            }
+        case PUT_TASK_DONE_BY_ADMIN_FAILURE:
+            return { 
+                data: false,
+                isLoading: false,
+                error: action.error
+            }
+        default:
+            return {
+                ...state,
+                data: false
+            }
     }
 }

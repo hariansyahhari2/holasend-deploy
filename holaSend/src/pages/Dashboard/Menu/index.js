@@ -74,18 +74,18 @@ const Menu = () => {
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link to="/dashboard/tasks-unfinished">
+                  <Link to="/dashboard/unfinished-tasks">
                     <a href="#" className="nav-link">
                       <i className="fas fa-spinner nav-icon" />
-                      <p>Tasks Unfinished</p>
+                      <p>Unfinished Tasks</p>
                     </a>
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link to="/dashboard/tasks-finished">
+                  <Link to="/dashboard/delivered-tasks">
                     <a href="#" className="nav-link">
                       <i className="fas fa-check-square nav-icon" />
-                      <p>Tasks Finished</p>
+                      <p>Delivered Tasks</p>
                     </a>
                   </Link>
                 </li>

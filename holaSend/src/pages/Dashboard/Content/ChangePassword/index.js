@@ -93,6 +93,7 @@ const ChangePassword = (props) => {
                                 <div className="card-body login-card-body" style={{margin: '30px'}}>
                                     <p className="login-box-msg">You are only one step a way from your new password, change your password now.</p>
                                     <Gap height={20} />
+                                    {/* <p className="label">Old Password <span style={{color: 'red'}}>*</span> </p> */}
                                     <div className="input-group mb-3">
                                         <input type="password" className="form-control" value={oldPassword} onChange={(e) => setOldPassword(e.target.value)} placeholder="Old Password" />
                                         <div className="input-group-append">

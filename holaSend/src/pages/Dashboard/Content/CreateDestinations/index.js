@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 import { connect } from "react-redux";
 import { useParams } from "react-router";
+import { get } from "react-scroll/modules/mixins/scroller";
 import swal from "sweetalert";
 import { Button, Gap, Input, Loading, MapView } from "../../../../components/atoms";
 import { getByIdDestinationsAction, postDestinationsAction, putByIdDestinationsAction } from "../../../../configs/actions/destinations/destinationsAction";
@@ -35,10 +36,22 @@ const CreateDestinations = (props) => {
 
     useEffect(() => {
         // jika sukses
-        if (props.data || props.putById) {
+        if (props.data) {
             swal("Create Destinations Success!", "", "success").then(() => {
                 return (
                     window.location.href = "/dashboard/create-destinations"
+                )
+            })
+            setDestination("");
+            setAddress("");
+            setLon("");
+            setLat("");
+        }
+
+        if (props.putById) {
+            swal("Update Destinations Success!", "", "success").then(() => {
+                return (
+                    window.location.href = "/dashboard/destinations-list"
                 )
             })
             setDestination("");
@@ -51,7 +64,11 @@ const CreateDestinations = (props) => {
         if (props.error) {
             swal("Create Destinations Error!", "", "error");
         }
-    }, [props.data, props.error, props.putById]);
+
+        if (props.errorEdit) {
+            swal("Update Destinations Error!", "", "error");
+        }
+    }, [props.data, props.error, props.putById, props.errorEdit]);
 
     useEffect(() => {
         setDestinationError("");
@@ -109,7 +126,7 @@ const CreateDestinations = (props) => {
             setDestinationError(destinationsError);
             setAddressError(addressError);
             setLocationError(locationError);
-            swal("Create Destinations Error!", "", "error");
+            swal("Error!", "Form must not blank", "error");
             return false;
         }
 
@@ -140,10 +157,8 @@ const CreateDestinations = (props) => {
                                       padding: "1rem 3rem",
                                   }}
                               >
-                                  <Gap height={10} />
-                                  <h3 className="card-title">
-                                      Create Destinations
-                                  </h3>
+                                <Gap height={10} />
+                                <h3 className="card-title">{props.getById ? "Edit Destinations" : "Create Destinations"}</h3>
                               </div>
                               <div
                                   className="card-body"
@@ -151,6 +166,7 @@ const CreateDestinations = (props) => {
                               >
                                   <Input
                                       label="Name"
+                                      required={true}
                                       value={destination}
                                       onChange={(e) =>
                                           setDestination(e.target.value)
@@ -164,12 +180,13 @@ const CreateDestinations = (props) => {
                                   <Gap height={15} />
                                   <Input
                                       label="Address"
+                                      required={true}
                                       value={address}
                                       onChange={(e) =>
-                                          setAddress(e.target.value)
-                                      }
-                                      placeholder="Address"
-                                  />
+                                        setAddress(e.target.value)
+                                    }
+                                    placeholder="Address"
+                                    />
                                   <Gap height={10} />
                                   <div style={{ fontSize: 12, color: "red" }}>
                                       {addressError}
@@ -177,6 +194,7 @@ const CreateDestinations = (props) => {
                                   <Gap height={15} />
                                   <MapView
                                       label="Pick Locations"
+                                      required={true}
                                       onLocate={onLocate}
                                       onAddressInput={onAddressInput}
                                   />
@@ -208,10 +226,10 @@ const CreateDestinations = (props) => {
                                   className="card-footer"
                                   style={{ padding: "1rem 3rem" }}
                               >
-                                  <Button
-                                      title="Submit"
-                                      onClick={() => onSubmit()}
-                                  />
+                                <Button
+                                    title={props.getById ? "Update" : "Submit"}
+                                    onClick={() => onSubmit()}
+                                />
                               </div>
                           </div>
                       </div>
@@ -229,7 +247,8 @@ const mapStateToProps = (state) => {
         data: state.postDestinationsReducer.data,
         getById: state.getByIdDestinationsReducer.data,
         putById: state.putByIdDestinationsReducer.data,
-        error: state.postDestinationsReducer.error || state.getByIdDestinationsReducer.error || state.putByIdDestinationsReducer.error ,
+        error: state.postDestinationsReducer.error || state.getByIdDestinationsReducer.error,
+        errorEdit: state.putByIdDestinationsReducer.error,
         isLoading: state.postDestinationsReducer.isLoading || state.getByIdDestinationsReducer.isLoading || state.putByIdDestinationsReducer.isLoading,
     };
 };

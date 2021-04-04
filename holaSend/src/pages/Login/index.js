@@ -25,15 +25,9 @@ const Login = (props) => {
                 localStorage.setItem('token', props.data.token)
                 localStorage.setItem('role', props.data.role)
                 localStorage.setItem('username', props.data.username)
-                swal({
-                    title: "Login Success!",
-                    icon: "success",
-                    button: "OK",
-                }).then(() => {
-                    return (
-                        window.location.href = "/dashboard"
-                    )
-                });
+                return (
+                    window.location.href = "/dashboard"
+                )
             } else {
                 swal("Login Error!", "Account not allowed!", "error");
             }

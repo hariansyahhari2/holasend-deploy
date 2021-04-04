@@ -34,7 +34,7 @@ const Register = (props) => {
     useEffect(() => {
         // jika register sukses
         if (props.data) {
-            swal("Registration Success!", "", "success").then(() => {
+            swal("Registration Success!", "Contact Admin for account activation!", "success").then(() => {
                 return (
                     window.location.href = "/login"
                 )
@@ -110,30 +110,42 @@ const Register = (props) => {
 
         if (!firstname) {
             firstnameError = "Firstname must not blank!"
+        } else if (firstname.length > 40) {
+            firstnameError = "Firstname max. 40 characters";
         }
         
         if (!lastname) {
             lastnameError = "Lastname must not blank!"
+        } else if (lastname.length > 40) {
+            lastnameError = "Lastname max. 40 characters";
         }
 
         if (!email.match(emailRegex)) {
             emailError = "Invalid Email!"
+        } else if (email.length > 50) {
+            emailError = "Email max. 50 characters";
         }
 
         if (!username.match(usernameRegex)) {
             usernameError = "Username must be more than 6 characters!";
+        } else if (username.length > 40) {
+            usernameError = "Username max. 40 characters";
         }
         
         if (password.length < 8) {
             passwordError = "Password must be more than 8 characters!";
         } else if (!password.match(passwordRegex)) {
             passwordError = "Password must contain capital letters and numbers";
+        } else if (password.length > 40) {
+            passwordError = "Password max. 40 characters";
         }
 
         if (confirmPassword !== password) {
             confirmPasswordError = "Confirm Password must match to Password"
         } else if (confirmPassword.length < 8) {
             confirmPasswordError = "Password must be more than 8 characters!";
+        } else if (confirmPassword.length > 40) {
+            confirmPasswordError = "Password max. 40 characters";
         }
 
         if (!identityCategory) {
@@ -142,10 +154,14 @@ const Register = (props) => {
         
         if (!identificationNumber) {
             identificationNumberError = "Identification Number must not blank!"
+        } else if (identificationNumber.length > 16) {
+            identificationNumberError = "Identification Number max. 16 digit!"
         }
 
         if (!contactNumber) {
             contactNumberError = "Contact Number must not blank!"
+        } else if (contactNumber.length > 12) {
+            contactNumberError = "Contact Number max. 12 digit!"
         }
 
         if (
@@ -193,32 +209,33 @@ const Register = (props) => {
                 >
                     <p className="title">Register</p>
                     <Gap height={10} />
-                    <Input label="First Name" value={firstname} onChange={(e) => setFirstname(e.target.value)} placeholder="First Name" />
+                    <Input label="First Name" required={true} value={firstname} onChange={(e) => setFirstname(e.target.value)} placeholder="First Name" />
                     <Gap height={10} />
                     <div style={{fontSize: 12, color: "red"}}>{firstnameError}</div>
                     <Gap height={20} />
-                    <Input label="Last Name" value={lastname} onChange={(e) => setLastname(e.target.value)} placeholder="Last Name" />
+                    <Input label="Last Name" required={true} value={lastname} onChange={(e) => setLastname(e.target.value)} placeholder="Last Name" />
                     <Gap height={10} />
                     <div style={{fontSize: 12, color: "red"}}>{lastnameError}</div>
                     <Gap height={20} />
-                    <Input label="Email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" />
+                    <Input label="Email" required={true} value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" />
                     <Gap height={10} />
                     <div style={{fontSize: 12, color: "red"}}>{emailError}</div>
                     <Gap height={20} />
-                    <Input label="Username" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Username" />
+                    <Input label="Username" required={true} value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Username" />
                     <Gap height={10} />
                     <div style={{fontSize: 12, color: "red"}}>{usernameError}</div>
                     <Gap height={20} />
-                    <Input label="Password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" type="password" />
+                    <Input label="Password" required={true} value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" type="password" />
                     <Gap height={10} />
                     <div style={{fontSize: 12, color: "red"}}>{passwordError}</div>
                     <Gap height={20} />
-                    <Input label="Confirm Password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} placeholder="Confirm Password" type="password" />
+                    <Input label="Confirm Password" required={true} value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} placeholder="Confirm Password" type="password" />
                     <Gap height={10} />
                     <div style={{fontSize: 12, color: "red"}}>{confirmPasswordError}</div>
                     <Gap height={20} />
                     <DropdownList
                         label="Identity Category"
+                        required={true}
                         data={[
                             {value: "KTP", label: "KTP"},
                             {value: "SIM", label: "SIM"},
@@ -231,11 +248,11 @@ const Register = (props) => {
                     <Gap height={10} />
                     <div style={{fontSize: 12, color: "red"}}>{identityCategoryError}</div>
                     <Gap height={20} />
-                    <Input label="Identification Number" value={identificationNumber} onChange={(e) => setIdentificationNumber(e.target.value)} placeholder="Identification Number" />
+                    <Input label="Identification Number" required={true} value={identificationNumber} onChange={(e) => setIdentificationNumber(e.target.value)} placeholder="Identification Number" />
                     <Gap height={10} />
                     <div style={{fontSize: 12, color: "red"}}>{identificationNumberError}</div>
                     <Gap height={20} />
-                    <Input label="Contact Number" value={contactNumber} onChange={(e) => setContactNumber(e.target.value)} placeholder="Contact Number" />
+                    <Input label="Contact Number" required={true} value={contactNumber} onChange={(e) => setContactNumber(e.target.value)} placeholder="Contact Number" />
                     <Gap height={10} />
                     <div style={{fontSize: 12, color: "red"}}>{contactNumberError}</div>
                     <Gap height={20} />

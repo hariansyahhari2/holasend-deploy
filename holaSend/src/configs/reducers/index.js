@@ -15,7 +15,8 @@ import {
     getAllTaskReducer, 
     deleteByIdTaskReducer, 
     getAllTaskFinishedReducer,
-    getAllTaskUnfinishedReducer
+    getAllTaskUnfinishedReducer,
+    putTaskDoneByAdminReducer
 } from "./task/taskReducer"
 import { 
     getAllUserFilterReducer, 
@@ -57,7 +58,8 @@ const rootReducer = combineReducers({
     getProfileReducer,
     putProfileReducer,
     getRadiusReducer,
-    putRadiusReducer
+    putRadiusReducer,
+    putTaskDoneByAdminReducer
 })
 
 export default rootReducer

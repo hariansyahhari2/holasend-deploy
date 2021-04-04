@@ -158,6 +158,7 @@ const CreateTask = (props) => {
                                 >
                                     <DropdownList
                                         label="Destination"
+                                        required={true}
                                         data={destinationsData}
                                         value={destinationId}
                                         placeholder="Select Destination"
@@ -172,6 +173,7 @@ const CreateTask = (props) => {
                                     <Gap height={15} />
                                     <DropdownList
                                         label="Priority"
+                                        required={true}
                                         data={[
                                             { value: "HIGH", label: "HIGH" },
                                             {
@@ -191,6 +193,7 @@ const CreateTask = (props) => {
                                     <Gap height={15} />
                                     <TextArea
                                         label="Notes"
+                                        required={true}
                                         value={notes}
                                         onChange={(e) =>
                                             setNotes(e.target.value)

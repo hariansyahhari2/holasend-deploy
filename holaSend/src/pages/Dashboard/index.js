@@ -27,8 +27,8 @@ const Dashboard = () => {
         <Switch>
           <Route path="/dashboard/profile" component={Profile} exact />
           <Route path="/dashboard/change-password" component={ChangePassword} exact />
-          <Route path="/dashboard/tasks-unfinished" component={TasksUnfinished} exact />
-          <Route path="/dashboard/tasks-finished" component={TasksFinished} exact />
+          <Route path="/dashboard/unfinished-tasks" component={TasksUnfinished} exact />
+          <Route path="/dashboard/delivered-tasks" component={TasksFinished} exact />
           <Route path="/dashboard/destinations-list" component={DestinationsList} exact />
           <Route path="/dashboard/create-task" component={CreateTask} exact />
           <Route path="/dashboard/tasks-report" exact render={() => (

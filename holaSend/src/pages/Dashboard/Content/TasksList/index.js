@@ -11,6 +11,7 @@ import { getAllDestinationsFilterAction } from "../../../../configs/actions/dest
 import {
     deleteByIdTaskAction,
     getAllTaskAction,
+    putTaskDoneByAdminAction,
 } from "../../../../configs/actions/task/taskAction";
 import { getAllUserFilterAction } from "../../../../configs/actions/user/userAction";
 import {PaginationButton} from "../../../../components/atoms/Button";
@@ -96,9 +97,17 @@ const TasksList = (props) => {
 
     useEffect(() => {
         if (props.isDelete) {
+            console.log("ini props delete", props.isDelete);
             onReload();
         }
     }, [props.isDelete]);
+
+    useEffect(() => {
+        if (props.doneByAdmin) {
+            console.log("ini props done", props.doneByAdmin);
+            onReload();
+        }
+    }, [props.doneByAdmin]);
 
     const onReload = () => {
         props.dispatchGetAllTaskAction({page: page, size: size}, filter);
@@ -134,6 +143,29 @@ const TasksList = (props) => {
             }
         });
     };
+
+    const onFinish = (id) => {
+        swal({
+            title: "Are you sure?",
+            text: "You will not be able to back this Task status!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        }).then((willFinish) => {
+            if (willFinish) {
+                console.log("ini id", id);
+                props.dispatchPutTaskDoneByAdmin(id)
+                swal("Poof! Your Task Done!", {
+                    icon: "success",
+                });
+            } else {
+                swal("Your Task is safe!");
+            }
+        });
+        
+    }
+
+    console.log("ini done", props.doneByAdmin);
 
     return (
         !props.isLoading ?
@@ -314,6 +346,19 @@ const TasksList = (props) => {
                                                                 onDelete(e.id)
                                                             } disabled />
                                                         }
+                                                        <span
+                                                            style={{
+                                                                margin: "3px",
+                                                            }}
+                                                        />
+                                                        {
+                                                            e.status == "PICKUP" ? 
+                                                            <Button
+                                                            className="fas fa-check-square btn-success"
+                                                            onClick={() =>
+                                                                onFinish(e.id)
+                                                            } /> : null
+                                                        }
                                                     </td>
                                                 </tr>
                                             ))}
@@ -348,8 +393,9 @@ const TasksList = (props) => {
 const mapStateToProps = (state) => {
     return {
         listTask: state.getAllTaskReducer.data,
-        isLoading: state.getAllTaskReducer.isLoading,
-        error: state.getAllTaskReducer.error,
+        doneByAdmin: state.putTaskDoneByAdminReducer.data,
+        isLoading: state.getAllTaskReducer.isLoading || state.putTaskDoneByAdminReducer.isLoading,
+        error: state.getAllTaskReducer.error || state.putTaskDoneByAdminReducer.error,
         pageInfo: state.getAllTaskReducer.pagination,
         isDelete: state.deleteByIdTaskReducer.data,
         listDestinations: state.getAllDestinationsFilterReducer.data,
@@ -363,6 +409,7 @@ const mapDispatchToProps = {
     dispatchDeleteByIdTaskAction: deleteByIdTaskAction,
     dispatchGetAllDestinationsFilterAction: getAllDestinationsFilterAction,
     dispatchGetAllUserFilterAction: getAllUserFilterAction,
+    dispatchPutTaskDoneByAdmin: putTaskDoneByAdminAction
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TasksList);

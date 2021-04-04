@@ -138,7 +138,7 @@ const TasksFinished = (props) => {
                                 className="m-0 text-dark"
                                 style={{ paddingLeft: "35px" }}
                             >
-                                Tasks Finished
+                                Delivered Tasks
                             </h1>
                         </div>
                     </div>
@@ -181,7 +181,6 @@ const TasksFinished = (props) => {
                                                 <th>Status</th>
                                                 <th>Priority</th>
                                                 <th>Notes</th>
-                                                <th>Requested By</th>
                                                 <th>Courier</th>
                                                 <th>Action</th>
                                             </tr>
@@ -195,37 +194,6 @@ const TasksFinished = (props) => {
                                                     <td>{e.status}</td>
                                                     <td>{e.priority}</td>
                                                     <td>{e.notes}</td>
-                                                    <td>
-                                                        <ModalView
-                                                            className="fas fa-eye btn-primary"
-                                                            title="User Info"
-                                                            p1="Username"
-                                                            c1={e.requestBy.username}
-                                                            p2="Email"
-                                                            c2={e.requestBy.email}
-                                                            p3="Role"
-                                                            c3={e.requestBy.role}
-                                                            p4="First Name"
-                                                            c4={e.requestBy.userDetails.firstName}
-                                                            p5="Last Name"
-                                                            c5={e.requestBy.userDetails.lastName}
-                                                            p6="Indentity Category"
-                                                            c6={e.requestBy.userDetails.identityCategory}
-                                                            p7="Identification Number"
-                                                            c7={e.requestBy.userDetails.identificationNumber}
-                                                            p8="Contact Number"
-                                                            c8={e.requestBy.userDetails.contactNumber}
-                                                        />
-                                                        <span
-                                                            style={{
-                                                                margin: "3px",
-                                                            }}
-                                                        />
-                                                        {e.requestBy
-                                                            ? e.requestBy
-                                                                .username
-                                                            : ""}
-                                                    </td>
                                                     <td>
                                                         {e.courier ?
                                                             <ModalView

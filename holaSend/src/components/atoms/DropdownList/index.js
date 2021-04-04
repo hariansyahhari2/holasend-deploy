@@ -1,6 +1,6 @@
 import React from 'react'
 
-const DropdownList = ({value, data, placeholder, label, handleDropdown, disabled}) => {
+const DropdownList = ({value, required, data, placeholder, label, handleDropdown, disabled}) => {
 
     const handleChange = (e) => {
         handleDropdown(e.target.value)
@@ -8,7 +8,7 @@ const DropdownList = ({value, data, placeholder, label, handleDropdown, disabled
 
     return (
         <div className="input-wrapper">
-            <p className="label">{label}</p>
+            <p className="label">{label} {required ? <span style={{color: 'red'}}>*</span> : null} </p>
             <select
                 value={value}
                 className="form-control"

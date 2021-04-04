@@ -199,15 +199,15 @@ const Profile = (props) => {
                                 </div>
                                 <div className="card-body" style={{ padding: "1rem 3rem" }}>
                                     <Gap height={10} />
-                                    <Input label="First Name" value={firstname} onChange={(e) => setFirstname(e.target.value)} placeholder="First Name" disabled={!edited} />
+                                    <Input label="First Name" required={edited} value={firstname} onChange={(e) => setFirstname(e.target.value)} placeholder="First Name" disabled={!edited} />
                                     <Gap height={10} />
                                     <div style={{fontSize: 12, color: "red"}}>{firstnameError}</div>
                                     <Gap height={20} />
-                                    <Input label="Last Name" value={lastname} onChange={(e) => setLastname(e.target.value)} placeholder="Last Name" disabled={!edited} />
+                                    <Input label="Last Name" required={edited} value={lastname} onChange={(e) => setLastname(e.target.value)} placeholder="Last Name" disabled={!edited} />
                                     <Gap height={10} />
                                     <div style={{fontSize: 12, color: "red"}}>{lastnameError}</div>
                                     <Gap height={20} />
-                                    <Input label="Email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" disabled={!edited} />
+                                    <Input label="Email" required={edited} value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" disabled={!edited} />
                                     <Gap height={10} />
                                     <div style={{fontSize: 12, color: "red"}}>{emailError}</div>
                                     <Gap height={20} />
@@ -217,6 +217,7 @@ const Profile = (props) => {
                                     <Gap height={20} />
                                     <DropdownList
                                         label="Identity Category"
+                                        required={edited}
                                         data={[
                                             {value: "KTP", label: "KTP"},
                                             {value: "SIM", label: "SIM"},
@@ -230,11 +231,11 @@ const Profile = (props) => {
                                     <Gap height={10} />
                                     <div style={{fontSize: 12, color: "red"}}>{identityCategoryError}</div>
                                     <Gap height={20} />
-                                    <Input label="Identification Number" value={identificationNumber} onChange={(e) => setIdentificationNumber(e.target.value)} placeholder="Identification Number" disabled={!edited} />
+                                    <Input label="Identification Number" required={edited} value={identificationNumber} onChange={(e) => setIdentificationNumber(e.target.value)} placeholder="Identification Number" disabled={!edited} />
                                     <Gap height={10} />
                                     <div style={{fontSize: 12, color: "red"}}>{identificationNumberError}</div>
                                     <Gap height={20} />
-                                    <Input label="Contact Number" value={contactNumber} onChange={(e) => setContactNumber(e.target.value)} placeholder="Contact Number" disabled={!edited} />
+                                    <Input label="Contact Number" required={edited} value={contactNumber} onChange={(e) => setContactNumber(e.target.value)} placeholder="Contact Number" disabled={!edited} />
                                     <Gap height={10} />
                                     <div style={{fontSize: 12, color: "red"}}>{contactNumberError}</div>
                                     <Gap height={20} />
